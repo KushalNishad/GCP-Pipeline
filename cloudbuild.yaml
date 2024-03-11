@@ -1,0 +1,32 @@
+steps:
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/kushal-100858388/kushal-image:$COMMIT_SHA', '.']
+
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/kushal-100858388/kushal-image:$COMMIT_SHA']
+
+  # setup cloud sdk
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - run
+      - deploy
+      - 'kushal-100858388' #$_SERVICE_NAME
+      - '--image'
+      - 'us-central1-docker.pkg.dev/${PROJECT_ID}/kushal-100858388/kushal-image:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1' #$_DEPLOY_REGION
+      - '--platform'
+      - 'managed' #$_PLATFORM
+    entrypoint: gcloud
+    timeout: 1200s
+
+images:
+  - 'us-central1-docker.pkg.dev/${PROJECT_ID}/kushal-100858388/kushal-image:$COMMIT_SHA'
+  
+options:
+    defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+
+#https://github.com/ScriptBytes/CloudRunDemo/blob/main/cloudbuild.yaml
+#https://www.youtube.com/watch?v=0mfng-vih_I
