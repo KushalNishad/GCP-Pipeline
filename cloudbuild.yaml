@@ -1,7 +1,7 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/nklab-415204/kushal-100858388/kushal-image:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/nklab-415204/kushal-100858388/kushal-image:$COMMIT_SHA']
 
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
