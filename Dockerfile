@@ -23,4 +23,4 @@ RUN npm install
 EXPOSE 3000
 
 # Set the default execution command to node src/index.js
-CMD ["node", "src/index.js"]
+CMD ["node", "src/app.js"]
