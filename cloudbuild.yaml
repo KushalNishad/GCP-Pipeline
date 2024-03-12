@@ -17,6 +17,7 @@ steps:
           --image us-central1-docker.pkg.dev/nklab-415204/gcp-pipeline/kushal-image:$COMMIT_SHA \
           --platform managed \
           --region us-central1
+          --port 3000
 
 images:
   - 'us-central1-docker.pkg.dev/nklab-415204/gcp-pipeline/kushal-image:$COMMIT_SHA'
