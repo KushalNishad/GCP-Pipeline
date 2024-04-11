@@ -1,11 +1,11 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/nklab-415204/gcp-pipeline/kushal-image:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'northamerica-northeast1.pkg.dev/nklab-415204/nishad-flask-image:$COMMIT_SHA', '.']
 
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/nklab-415204/gcp-pipeline/kushal-image:$COMMIT_SHA']
+    args: ['push', 'northamerica-northeast1.pkg.dev/nklab-415204/nishad-flask-image:$COMMIT_SHA']
 
   # Deploy Docker container to Cloud Run using Google Cloud SDK
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -14,12 +14,12 @@ steps:
       - '-c'
       - |
         gcloud run deploy kushal-image \
-          --image us-central1-docker.pkg.dev/nklab-415204/gcp-pipeline/kushal-image:$COMMIT_SHA \
+          --image northamerica-northeast1.pkg.dev/nklab-415204/nishad-flask-image:$COMMIT_SHA \
           --platform managed \
-          --region us-central1
+          --region northamerica-northeast1
 
 images:
-  - 'us-central1-docker.pkg.dev/nklab-415204/gcp-pipeline/kushal-image:$COMMIT_SHA'
+  - 'northamerica-northeast1.pkg.dev/nklab-415204/nishad-flask-image:$COMMIT_SHA'
   
 options:
     defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
